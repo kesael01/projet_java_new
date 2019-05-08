@@ -14,17 +14,37 @@ import java.util.Set;
  * @author sandrine
  */
 public class Formateur {
+    /**
+   * identifiant unique du formateur
+   */
     protected int idform;
-    
+    /**
+   * numero de la rue
+   */
     protected int number;
-    
+    /**
+   * matricule
+   */
     protected String matricule;
-    
+    /**
+   * nom du formateur
+   */
     protected String nom;
-    
+    /**
+   * prenom du formateur
+   */
     protected String prenom;
+    /**
+   * rue
+   */
     protected String rue;
+    /**
+   * localite
+   */
     protected String localite;
+    /**
+   * numero de telephone
+   */
     protected String tel;
   
     protected Set<Infos> info=new HashSet<>();

@@ -20,6 +20,9 @@ public class API_LOCAL1 {
  * @param description description du local
  */
 
+    public API_LOCAL1(){
+        
+    }
     public API_LOCAL1(int idlocal, int places, String sigle, String description) {
         this.idlocal = idlocal;
         this.places = places;

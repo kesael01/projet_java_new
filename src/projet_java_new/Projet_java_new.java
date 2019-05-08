@@ -116,7 +116,11 @@ public class Projet_java_new {
         try {
             System.out.println("sigle :");
             String sigle = sc.nextLine();
-            loActuel.setSigle(sigle);
+           
+            System.out.println("nombre de places ");
+            int place=sc.nextInt();
+             loActuel.setSigle(sigle);
+             loActuel.setPlaces(place);
            API_LOCAL1DAO.update(loActuel);
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
