@@ -80,7 +80,7 @@ public class API_FORMATEUR1 {
     }
     /**
      * setter idcours
-     * @param idcours identifiant du client
+     * @param idcours identifiant du formateur
      */
 
     public void setIdform(int idform) {
@@ -95,7 +95,7 @@ public class API_FORMATEUR1 {
     }
     /**
      * setter numero
-     * @param numero dadresse du client
+     * @param numero dadresse du formateur
      */
 
     public void setNumber(int number) {
@@ -110,7 +110,7 @@ public class API_FORMATEUR1 {
     }
     /**
      * setter matricule
-     * @param matricule du client
+     * @param matricule du formateur
      */
 
     public void setMatricule(String matricule) {
@@ -125,7 +125,7 @@ public class API_FORMATEUR1 {
     }
     /**
      * setter nom
-     * @param nom du client
+     * @param nom du formateur
      */
 
     public void setNom(String nom) {
@@ -140,7 +140,7 @@ public class API_FORMATEUR1 {
     }
     /**
      * setter prenom
-     * @param prenom du client
+     * @param prenom du formateur
      */
 
     public void setPrenom(String prenom) {
@@ -185,13 +185,16 @@ public class API_FORMATEUR1 {
     }
     /**
      * setter tel
-     * @param tel telephone du client
+     * @param tel telephone du formateur
      */
 
     public void setTel(String tel) {
         this.tel = tel;
-    }
-
+        }
+    /**
+     * méthode toString
+     * @return informations complètes
+     */
     @Override
     public String toString() {
         return "API_FORMATEUR1{" + "idform=" + idform + ", number=" + number + ", matricule=" + matricule + ", nom=" + nom + ", prenom=" + prenom + ", rue=" + rue + ", localite=" + localite + ", tel=" + tel + '}';

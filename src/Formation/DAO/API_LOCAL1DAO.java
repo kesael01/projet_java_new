@@ -134,13 +134,13 @@ public class API_LOCAL1DAO extends DAO<API_LOCAL1> {
      */
     @Override
     public API_LOCAL1 update(API_LOCAL1 obj) throws SQLException {
-        String req = "update API_LOCAL1 set idlocal=?,places=?,description=? where sigle= ?";
+        String req = "update API_LOCAL1 set places=? where sigle= ?";
         try (PreparedStatement pstm = dbConnect.prepareStatement(req)) {
            
-            pstm.setString(4, obj.getSigle());
-            pstm.setInt(1, obj.getIdlocal());
-            pstm.setInt(2, obj.getPlaces());
-            pstm.setString(3, obj.getDescription());
+            pstm.setString(2, obj.getSigle());
+            
+            pstm.setInt(1, obj.getPlaces());
+            
             
             
             int n = pstm.executeUpdate();

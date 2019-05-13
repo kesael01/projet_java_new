@@ -56,10 +56,11 @@ public class API_LOCAL1DAOTest {
      @Test
     public void testCreate() throws Exception {
         System.out.println("create");
+       
         API_LOCAL1 obj = new API_LOCAL1(0,5,"TestSigle","TestDescription");
        API_LOCAL1DAO instance = new API_LOCAL1DAO();
         instance.setConnection(dbConnect);
-        API_LOCAL1 expResult = new API_LOCAL1(0,5,"TestSigle","TestDescription");
+        API_LOCAL1 expResult = new API_LOCAL1(0,10,"TestSigle","TestDescription");
         API_LOCAL1 result = instance.create(obj);
         
         assertEquals("sigles différents",expResult.getSigle(), result.getSigle());
@@ -82,7 +83,7 @@ public class API_LOCAL1DAOTest {
             fail("exception de code postal non déclenchée");
             instance.delete(result3);
         }
-        catch(SQLException e){}
+        catch(SQLException e){}  
        
     }
 

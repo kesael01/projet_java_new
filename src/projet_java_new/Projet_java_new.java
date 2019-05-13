@@ -76,7 +76,7 @@ public class Projet_java_new {
                     System.out.println("choix incorrect");
             }
 
-        } while (ch != 7);
+        } while (ch != 6);
         DBConnection.closeConnection();
     }
 
@@ -116,12 +116,17 @@ public class Projet_java_new {
         try {
             System.out.println("sigle :");
             String sigle = sc.nextLine();
-           
+          // loActuel=API_LOCAL1DAO.
+             loActuel=API_LOCAL1DAO.read1(sigle);
+              System.out.println(loActuel);
+          
             System.out.println("nombre de places ");
             int place=sc.nextInt();
-             loActuel.setSigle(sigle);
+            //loActuel.setSigle(sigle);
              loActuel.setPlaces(place);
-           API_LOCAL1DAO.update(loActuel);
+             
+            API_LOCAL1DAO.update(loActuel);
+            System.out.println(API_LOCAL1DAO.read1(sigle));
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
         }
@@ -132,7 +137,10 @@ public class Projet_java_new {
         try {
             System.out.println("sigle :");
             String sigle = sc.nextLine();
+             loActuel=API_LOCAL1DAO.read1(sigle);
+              System.out.println(loActuel);
             API_LOCAL1DAO.delete(loActuel);
+            System.out.println("ligne supprime");
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
         }

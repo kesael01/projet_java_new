@@ -10,19 +10,38 @@ package Formation.metier;
  * @author sandrine
  */
 public class API_LOCAL1 {
-    protected int idlocal,places;
-    protected String sigle,description;
+   /**
+   * identifiant du local
+   */
+    protected int idlocal;
     /**
- * constructeur paramétré
- * @param idlocal identifiant unique du local
- * @param places nombre de places
- * @param sigle sigle du local
- * @param description description du local
- */
+   * nombre de places
+   */
+    protected int places;
+    /**
+   * sigle du local
+   */
+    protected String sigle;
+    /**
+   * description du local
+   */
+    protected String description;
 
+    /**
+     * constructeur par défaut
+     */ 
+   
     public API_LOCAL1(){
         
     }
+    /**
+   * constructeur paramétré
+   * @param idlocal identifiant unique du local
+   * @param places nombre de places
+   * @param sigle sigle du local
+   * @param description description du local
+   */
+
     public API_LOCAL1(int idlocal, int places, String sigle, String description) {
         this.idlocal = idlocal;
         this.places = places;
@@ -36,6 +55,10 @@ public class API_LOCAL1 {
     public int getIdlocal() {
         return idlocal;
     }
+    /**
+     * setter idlocal
+     * @param idlocal lidentifiant du local
+     */
 
     public void setIdlocal(int idlocal) {
         this.idlocal = idlocal;
@@ -47,6 +70,10 @@ public class API_LOCAL1 {
     public int getPlaces() {
         return places;
     }
+    /**
+     * setter places
+     * @param places du local
+     */
 
     public void setPlaces(int places) {
         this.places = places;
@@ -58,6 +85,10 @@ public class API_LOCAL1 {
     public String getSigle() {
         return sigle;
     }
+    /**
+     * setter sigle
+     * @param sigle sigle du local
+     */
 
     public void setSigle(String sigle) {
         this.sigle = sigle;
@@ -69,10 +100,18 @@ public class API_LOCAL1 {
     public String getDescription() {
         return description;
     }
+    /**
+     * setter description
+     * @param description description du loacl
+     */
 
     public void setDescription(String description) {
         this.description = description;
     }
+     /**
+     * méthode toString
+     * @return informations complètes
+     */
 
     @Override
     public String toString() {
