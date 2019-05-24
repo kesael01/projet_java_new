@@ -11,9 +11,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-import Formation.DAO.API_LOCAL1DAO;
+import Formation.DAO.API_SESSIONCOURS1DAO;
+import Formation.DAO.API_COURS1DAO;
 import Formation.DAO.DAO;
-import Formation.metier.API_LOCAL1;
+import Formation.metier.API_SESSIONCOURS1;
+import Formation.metier.API_COURS1;
 import Myconnections.DBConnection;
 /**
  *
@@ -21,14 +23,14 @@ import Myconnections.DBConnection;
  */
 public class Projet_java_new {
 
-    /**
-     * @param args the command line arguments
-     */
-    
-
     Scanner sc = new Scanner(System.in);
-    API_LOCAL1 loActuel = null;
-    DAO<API_LOCAL1> API_LOCAL1DAO = null;
+    //Instanciation de la variable globale vt de la classe 
+    API_SESSIONCOURS1 session = null;
+    API_COURS1 cours = null;
+    //Instanciation de la variable globale tx de la classe DAO
+    DAO<API_SESSIONCOURS1> sess = null;
+    DAO<API_COURS1> crs = null;
+//Constructeur par défaut 
 
     public Projet_java_new() {
 
@@ -43,12 +45,12 @@ public class Projet_java_new {
 
         System.out.println("connexion établie");
 
-        API_LOCAL1DAO = new API_LOCAL1DAO();
-        API_LOCAL1DAO.setConnection(dbConnect);
+        crs = new API_COURS1DAO();
+        crs.setConnection(dbConnect);
 
         int ch = 0;
         do {
-            System.out.println("1.nouveau \n2.recherche sur base de sigle\n3.recherche sur description1\n4.modification\n5.suppression\n6.fin");
+            System.out.println("1.nouveau cours \n2.recherche sur base de lidentifiant\n3.recherche sur base de nom de la matiere\n4.modification\n5.suppression\n6.affichage des cours\n7.fin");
             System.out.print("choix :");
             ch = sc.nextInt();
             sc.skip("\n");
@@ -57,7 +59,7 @@ public class Projet_java_new {
                     nouveau();
                     break;
                 case 2:
-                    recherche();
+                recherche();
                     break;
                 case 3:
                    rechnom1();
@@ -69,31 +71,29 @@ public class Projet_java_new {
                     sup();
                     break;
                 
-                case 6:
+                case 7:
                     System.out.println("bye");
                     break;
                 default:
                     System.out.println("choix incorrect");
             }
 
-        } while (ch != 6);
+        } while (ch != 7);
         DBConnection.closeConnection();
     }
 
     public void nouveau() {
 
-        System.out.print("sigle :");
-        String sigle= sc.nextLine();
-        System.out.print("description :");
-        String description = sc.nextLine();
-        System.out.print("places:");
-        int places = sc.nextInt();
-        sc.skip("\n");
+        System.out.print("matiere :");
+        String matiere = sc.nextLine();
+        System.out.print("heures :");
+        int heures= sc.nextInt();
+         sc.skip("\n");
         
-        loActuel = new API_LOCAL1(0, places,sigle,description);
+        cours = new API_COURS1(matiere, heures);
         try {
-            loActuel = API_LOCAL1DAO.create(loActuel);
-            System.out.println("local actuel : " + loActuel);
+            cours = crs.create(cours);
+            System.out.println("cours actuel : " + cours);
         } catch (SQLException e) {
             System.out.println("erreur :" + e);
         }
@@ -102,10 +102,21 @@ public class Projet_java_new {
 
     public void recherche() {
         try {
-            System.out.println("sigle recherché :");
-            String nc = sc.nextLine();
-            loActuel = API_LOCAL1DAO.read1(nc);
-            System.out.println("local actuel : " + loActuel);
+            System.out.println("id recherché :");
+            int nc = sc.nextInt();
+            cours= crs.read(nc);
+          
+                    /*try {
+                    List<API_SESSIONCOURS1> alc = ((API_SESSIONCOURS1DAO) sess).rechNom(nc);
+                            for (API_SESSIONCOURS1 cl : alc) {
+                                System.out.println(cl);
+                            }
+                        } catch (SQLException e) {
+                            System.out.println("erreur " + e.getMessage());
+                        }*/
+
+            //System.out.println("cours actuel : " + cours);
+            System.out.println("session " + session);
 
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
@@ -114,19 +125,27 @@ public class Projet_java_new {
 
     public void modif() {
         try {
-            System.out.println("sigle :");
-            String sigle = sc.nextLine();
-          // loActuel=API_LOCAL1DAO.
-             loActuel=API_LOCAL1DAO.read1(sigle);
-              System.out.println(loActuel);
+            System.out.println("identifiant :");
+            int id = sc.nextInt();
           
-            System.out.println("nombre de places ");
-            int place=sc.nextInt();
-            //loActuel.setSigle(sigle);
-             loActuel.setPlaces(place);
+             cours=crs.read(id);
+              System.out.println(cours);
+                 /*try {
+                    List<API_SESSIONCOURS1> alc = ((API_SESSIONCOURS1DAO) sess).rechNom(id);
+                            for (API_SESSIONCOURS1 cl : alc) {
+                                System.out.println(cl);
+                            }
+                        } catch (SQLException e) {
+                            System.out.println("erreur " + e.getMessage());
+                        }*/
+          
+            System.out.println("nombre d'heures ");
+            int nbre=sc.nextInt();
+          
+             cours.setHeures(nbre);
              
-            API_LOCAL1DAO.update(loActuel);
-            System.out.println(API_LOCAL1DAO.read1(sigle));
+           crs.update(cours);
+            System.out.println(crs.read(id));
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
         }
@@ -135,11 +154,11 @@ public class Projet_java_new {
 
     public void sup() {
         try {
-            System.out.println("sigle :");
-            String sigle = sc.nextLine();
-             loActuel=API_LOCAL1DAO.read1(sigle);
-              System.out.println(loActuel);
-            API_LOCAL1DAO.delete(loActuel);
+            System.out.println("id :");
+            int id = sc.nextInt();
+             cours=crs.read(id);
+              System.out.println(cours);
+            crs.delete(cours);
             System.out.println("ligne supprime");
         } catch (SQLException e) {
             System.out.println("erreur " + e.getMessage());
@@ -149,11 +168,11 @@ public class Projet_java_new {
    
     
     public void rechnom1() {
-        System.out.println("description : ");
-        String description = sc.nextLine();
+        System.out.println("matiere : ");
+        String matiere = sc.nextLine();
         try {
-            List<API_LOCAL1> alc = ((API_LOCAL1DAO) API_LOCAL1DAO).rechNom1(description);
-            for (API_LOCAL1 cl : alc) {
+            List<API_COURS1> alc = ((API_COURS1DAO) crs).rechNom1(matiere);
+            for (API_COURS1 cl : alc) {
                 System.out.println(cl);
             }
         } catch (SQLException e) {
@@ -161,6 +180,18 @@ public class Projet_java_new {
         }
     }
 
+    public void rechnom2(int id) {
+        
+        try {
+            List<API_SESSIONCOURS1> l = ((API_SESSIONCOURS1DAO) sess).rechNom(id);
+            for (API_SESSIONCOURS1 cl : l) {
+                System.out.println(cl);
+            }
+        } catch (SQLException e) {
+            System.out.println("erreur " + e.getMessage());
+        }
+    
+    }
    
 
     

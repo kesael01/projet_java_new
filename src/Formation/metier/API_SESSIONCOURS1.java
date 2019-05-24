@@ -51,7 +51,7 @@ public class API_SESSIONCOURS1 {
    * @param datefin date de fin
    */
 
-    public API_SESSIONCOURS1(int idsesscours, int idlocal, int idcours, int nbreinscrits, Date datedebut, Date datefin) {
+    public API_SESSIONCOURS1(int idsesscours, Date datedebut, Date datefin, int nbreinscrits, int idcours,int idlocal ) {
         this.idsesscours = idsesscours;
         this.idlocal = idlocal;
         this.idcours = idcours;

@@ -31,10 +31,17 @@ public class API_COURS1 {
    * @param matiere nom de la matiere
    */
 
-    public API_COURS1(int idcours, int heures, String matiere) {
+    public API_COURS1(int idcours, String matiere, int heures) {
         this.idcours = idcours;
-        this.heures = heures;
         this.matiere = matiere;
+        this.heures = heures;
+        
+    }
+    public API_COURS1(String matiere,int heures) {
+       
+        this.matiere = matiere;
+        this.heures = heures;
+        
     }
     /**
     * getter idcours
